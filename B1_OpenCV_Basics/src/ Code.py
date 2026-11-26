@@ -36,7 +36,11 @@ for x, y, w, h in faces:
     blurred = cv.GaussianBlur(face, (15, 15), 0)
     img[y:y+h, x:x+w] = blurred
 
-cv.imwrite("output.jpg", img)
-cv.imshow("result", img)
+#亮度和对比度调整
+adjusted = cv.convertScaleAbs(img, alpha=1.8, beta=30)
+
+comparison = cv.hconcat([img, adjusted])
+cv.imwrite("brightness_contrast_comparison.jpg", comparison)
+cv.imshow("before | after", comparison)
 cv.waitKey(0)
 cv.destroyAllWindows()
