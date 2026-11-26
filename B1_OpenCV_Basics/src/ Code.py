@@ -41,7 +41,7 @@ adjusted = cv.convertScaleAbs(img, alpha=1.8, beta=30)
 
 comparison = cv.hconcat([img, adjusted])
 cv.imwrite("brightness_contrast_comparison.jpg", comparison)
-cv.imshow("before | after", comparison)'''
+cv.imshow("before | after", comparison)
 
 # 获取原图高度、宽度
 height, width = img.shape[:2]
@@ -61,6 +61,17 @@ comparison = cv.hconcat([img, cropped_display])
 cv.imwrite("cropped.jpg", cropped)
 cv.imwrite("crop_comparison.jpg", comparison)
 
-cv.imshow("Original | Cropped (enlarged)", comparison)
+cv.imshow("Original | Cropped (enlarged)", comparison)'''
+
+# 对整张图像进行高斯模糊
+blurred = cv.GaussianBlur(img, (31, 31), 0)
+
+# 横向拼接：左边原图，右边模糊结果
+comparison = cv.hconcat([img, blurred])
+
+cv.imwrite("global_blur.jpg", blurred)
+cv.imwrite("global_blur_comparison.jpg", comparison)
+
+cv.imshow("Original | Global Blur", comparison)
 cv.waitKey(0)
 cv.destroyAllWindows()
